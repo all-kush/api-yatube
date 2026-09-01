@@ -9,7 +9,7 @@ router = DefaultRouter()
 router.register('posts', PostViewSet)
 router.register('groups', GroupViewSet)
 
-urlpatterns = [
+urlpatterns_v1 = [
     path('', include(router.urls)),
     path('posts/<int:post_id>/comments/', CommentViewSet.as_view({
         'get': 'list',
@@ -22,4 +22,8 @@ urlpatterns = [
               'patch': 'partial_update',
               'delete': 'destroy'}), name='post-comments-detail'),
     path('api-token-auth/', views.obtain_auth_token),
+]
+
+urlpatterns = [
+    path('v1/', include(urlpatterns_v1)),
 ]
